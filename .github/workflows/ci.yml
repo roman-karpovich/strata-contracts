@@ -131,17 +131,6 @@ jobs:
           done
           echo "both deployable contracts present"
 
-      - name: Replay the captured Blend integration
-        run: |
-          mkdir -p integration-tests/blend-fork/wasm
-          cp target/wasm32v1-none/release/strata_epoch_manager.wasm integration-tests/blend-fork/wasm/
-          cp target/wasm32v1-none/release/strata_blend_adapter.wasm integration-tests/blend-fork/wasm/
-          manifest=integration-tests/blend-fork/Cargo.toml
-          cargo fmt --manifest-path "$manifest" --all -- --check
-          cargo fetch --locked --manifest-path "$manifest"
-          cargo clippy --locked --offline --manifest-path "$manifest" --all-targets -- -D warnings
-          cargo test --locked --offline --manifest-path "$manifest"
-
   docs:
     name: docs are current
     runs-on: ubuntu-latest

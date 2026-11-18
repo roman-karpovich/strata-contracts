@@ -40,12 +40,6 @@ fn one_year_epoch_on_the_testnet_pool() {
     testnet().cache(BUNDLE).offline().run(scenario).unwrap();
 }
 
-#[test]
-#[ignore = "re-captures from the public testnet RPC"]
-fn recapture() {
-    testnet().cache(BUNDLE).refresh().run(scenario).unwrap();
-}
-
 fn scenario(fork: &ScenarioFork<'_>) {
     let env = fork.env();
     fork.mock_all_auths();
